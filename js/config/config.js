@@ -1,4 +1,4 @@
-const CONFIG = {
+export const CONFIG = {
     API: {
         KEY: 'AIzaSyCAvikMyrIpgNfkoccJQtUMkzk6ZTfZMCw',
         BASE_URL: 'wss://generativelanguage.googleapis.com/ws',
@@ -16,9 +16,6 @@ const CONFIG = {
         OUTPUT_SAMPLE_RATE: 24000, // Adjust this to change pitch as desired
         BUFFER_SIZE: 7680,
         CHANNELS: 1,
-    },
-    ROARM: {
-        IP_ADDRESS: '192.168.1.4', // Add this if using the RoArm branch
     },
 };
 
