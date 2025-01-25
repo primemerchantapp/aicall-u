@@ -2,6 +2,7 @@ import { Logger } from '../utils/logger.js';
 import { ApplicationError, ErrorCodes } from '../utils/error-boundary.js';
 import { GoogleSearchTool } from './google-search.js';
 import { WeatherTool } from './weather-tool.js';
+import { ScribeTool } from './scribe.js'; // Import the Scribe tool
 
 /**
  * Manages the registration and execution of tools.
@@ -17,11 +18,12 @@ export class ToolManager {
     }
 
     /**
-     * Registers the default tools: GoogleSearchTool and WeatherTool.
+     * Registers the default tools: GoogleSearchTool, WeatherTool, and ScribeTool.
      */
     registerDefaultTools() {
         this.registerTool('googleSearch', new GoogleSearchTool());
         this.registerTool('weather', new WeatherTool());
+        this.registerTool('scribe', new ScribeTool()); // Register the Scribe tool
     }
 
     /**
@@ -113,4 +115,4 @@ export class ToolManager {
             };
         }
     }
-} 
+}
