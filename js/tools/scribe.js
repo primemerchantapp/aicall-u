@@ -52,10 +52,10 @@ export class VoiceCommandTool {
         created_at: new Date().toISOString()
       });
 
-      Logger.info("Document successfully written with ID: ", docRef.id);
+      Logger.info(`Document successfully written with ID: ${docRef.id}`);
       return `Data saved successfully with ID: ${docRef.id}`;
     } catch (error) {
-      Logger.error("Error saving data to Firebase", error);
+      Logger.error("Error saving data to Firebase: ", error.message);
       throw new Error("Failed to save data. Please try again.");
     }
   }
