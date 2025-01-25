@@ -3,43 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect Button</title>
+    <title>Gemini 2.0 Flash Multimodal Live API Client</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="css/style.css">
     <style>
         body {
             margin: 0;
             padding: 0;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: flex-start;
-            align-items: flex-start;
-            height: 100vh;
-            overflow: hidden;
+            background: transparent;
+        }
+        #app {
+            color: transparent;
+            background: transparent;
+            visibility: hidden;
         }
         #connect-button {
+            visibility: visible;
             position: absolute;
             top: 10px;
             left: 10px;
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #007BFF;
-            color: #fff;
+            color: white;
+            background: #007BFF;
             border: none;
             border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            z-index: 1000;
             cursor: pointer;
         }
         #connect-button:hover {
-            background-color: #0056b3;
+            background: #0056b3;
         }
     </style>
 </head>
 <body>
-    <button id="connect-button">Connect</button>
-    <script src="js/main.js" type="module"></script>
+    <div id="app">
+        <!-- Main Controls -->
+        <div class="main-controls">
+            <button id="connect-button">Connect</button>
+        </div>
+
+        <!-- Configuration Panel (Hidden by default on mobile) -->
+        <div id="config-container" class="hidden-mobile">
+            <div class="config-wrapper">
+                <!-- Preset Buttons and Configuration -->
+                <!-- Content hidden by transparency -->
+            </div>
+        </div>
+
+        <!-- Chat Interface -->
+        <div class="chat-interface">
+            <!-- Logs and Input Controls -->
+            <!-- Content hidden by transparency -->
+        </div>
+
+        <!-- Audio Visualizers -->
+        <div class="audio-visualizers">
+            <div class="visualizer-container">
+                <!-- Content hidden by transparency -->
+            </div>
+        </div>
+
+        <!-- Video/Screen Preview Containers -->
+        <div id="video-container" style="display: none;">
+            <video id="preview" playsinline autoplay muted></video>
+        </div>
+        <div id="screen-container" style="display: none;">
+            <video id="screen-preview" playsinline autoplay muted></video>
+        </div>
+    </div>
     <script>
         document.getElementById('connect-button').addEventListener('click', () => {
+            // Request microphone permissions
             navigator.mediaDevices.getUserMedia({ audio: true })
-                .then(() => alert('Microphone permission granted!'))
-                .catch(() => alert('Microphone permission denied.'));
+                .then(() => {
+                    alert('Microphone permission granted!');
+                    
+                    // Establish WebSocket connection after permission is granted
+                    const ws = new WebSocket('wss://example.com/socket'); // Replace with your WebSocket URL
+                    
+                    ws.onopen = () => {
+                        alert('WebSocket connection established!');
+                    };
+                    
+                    ws.onerror = (error) => {
+                        alert('WebSocket connection failed: ' + error.message);
+                    };
+                    
+                    ws.onclose = () => {
+                        alert('WebSocket connection closed.');
+                    };
+                })
+                .catch(() => {
+                    alert('Microphone permission denied.');
+                });
         });
     </script>
 </body>
